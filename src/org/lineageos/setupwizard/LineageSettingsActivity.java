@@ -44,9 +44,9 @@ import lineageos.providers.LineageSettings;
 
 public class LineageSettingsActivity extends BaseSetupWizardActivity {
 
-    public static final String TAG = LineageSettingsActivity.class.getSimpleName();
+    public static final String TAG = "BaikalSetupWizard:" + LineageSettingsActivity.class.getSimpleName();
 
-    public static final String PRIVACY_POLICY_URI = "https://crdroid.net/legal";
+    public static final String PRIVACY_POLICY_URI = "http://baikalos.ru/legal";
 
     private SetupWizardApp mSetupWizardApp;
 

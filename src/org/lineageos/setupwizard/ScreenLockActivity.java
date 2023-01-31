@@ -31,7 +31,7 @@ import org.lineageos.setupwizard.util.SetupWizardUtils;
 
 public class ScreenLockActivity extends SubBaseActivity {
 
-    public static final String TAG = ScreenLockActivity.class.getSimpleName();
+    public static final String TAG = "BaikalSetupWizard:" + ScreenLockActivity.class.getSimpleName();
 
     @Override
     protected void onNextPressed() {

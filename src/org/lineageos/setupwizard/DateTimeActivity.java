@@ -51,7 +51,7 @@ import java.util.TimeZone;
 public class DateTimeActivity extends BaseSetupWizardActivity implements
         TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
-    public static final String TAG = DateTimeActivity.class.getSimpleName();
+    public static final String TAG = "BaikalSetupWizard:" + DateTimeActivity.class.getSimpleName();
 
     private static final String KEY_ID = "id"; // value: String
     private static final String KEY_DISPLAYNAME = "name"; // value: String

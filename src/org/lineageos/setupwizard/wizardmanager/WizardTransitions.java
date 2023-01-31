@@ -26,7 +26,7 @@ import android.util.SparseArray;
 
 public class WizardTransitions extends SparseArray<String> implements Parcelable {
 
-    private static final String TAG = "WizardTransitions";
+    private static final String TAG = "BaikalSetupWizard:" + "WizardTransitions";
 
     private String mDefaultAction;
 

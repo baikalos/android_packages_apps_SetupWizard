@@ -31,7 +31,7 @@ import org.lineageos.setupwizard.util.SetupWizardUtils;
 
 public class SetupWizardExitActivity extends BaseSetupWizardActivity {
 
-    private static final String TAG = SetupWizardExitActivity.class.getSimpleName();
+    private static final String TAG = "BaikalSetupWizard:" + SetupWizardExitActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

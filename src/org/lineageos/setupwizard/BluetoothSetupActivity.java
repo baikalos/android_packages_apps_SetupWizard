@@ -26,7 +26,7 @@ import org.lineageos.setupwizard.util.SetupWizardUtils;
 
 public class BluetoothSetupActivity extends WrapperSubBaseActivity {
 
-    public static final String TAG = BluetoothSetupActivity.class.getSimpleName();
+    public static final String TAG = "BaikalSetupWizard:" + BluetoothSetupActivity.class.getSimpleName();
 
     private static final String ACTION_CONNECT_INPUT =
             "com.google.android.intent.action.CONNECT_INPUT";
