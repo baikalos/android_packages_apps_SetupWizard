@@ -32,7 +32,7 @@ import android.util.Log;
 
 public abstract class SubBaseActivity extends BaseSetupWizardActivity {
 
-    public static final String TAG = SubBaseActivity.class.getSimpleName();
+    public static final String TAG = "BaikalSetupWizard:" + SubBaseActivity.class.getSimpleName();
 
     private boolean mIsSubactivityNotFound = false;
     private int mRequestCode;

@@ -30,6 +30,7 @@ import static org.lineageos.setupwizard.SetupWizardApp.KEY_SEND_METRICS;
 import static org.lineageos.setupwizard.SetupWizardApp.LOGV;
 import static org.lineageos.setupwizard.SetupWizardApp.NAVIGATION_OPTION_KEY;
 import static org.lineageos.setupwizard.SetupWizardApp.UPDATE_RECOVERY_PROP;
+import static org.lineageos.setupwizard.SetupWizardApp.ENABLE_GMS;
 
 import android.animation.Animator;
 import android.app.Activity;
@@ -43,6 +44,7 @@ import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
@@ -50,17 +52,24 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.ImageView;
+import android.util.Log; 
+
+import android.content.DialogInterface;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog.Builder;
+
 
 import com.google.android.setupcompat.util.SystemBarHelper;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
+import org.lineageos.setupwizard.wizardmanager.WizardManager;
 import org.lineageos.setupwizard.util.SetupWizardUtils;
 
 import lineageos.providers.LineageSettings;
 
 public class FinishActivity extends BaseSetupWizardActivity {
 
-    public static final String TAG = FinishActivity.class.getSimpleName();
+    public static final String TAG = "BaikalSetupWizard:" + FinishActivity.class.getSimpleName();
 
     private ImageView mReveal;
 
@@ -69,13 +78,24 @@ public class FinishActivity extends BaseSetupWizardActivity {
     private final Handler mHandler = new Handler();
 
     private volatile boolean mIsFinishing = false;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mContext = this;
+
         if (LOGV) {
             logActivityState("onCreate savedInstanceState=" + savedInstanceState);
         }
+
+        /*if (SetupWizardUtils.hasGMS(this)) {
+            Log.v(TAG, "onCreate hasGMS, skip linage wizard");
+            SetupWizardUtils.disableHome(this);
+            finish();
+            return;
+        }*/
         mSetupWizardApp = (SetupWizardApp) getApplication();
         mReveal = (ImageView) findViewById(R.id.reveal);
         setNextText(R.string.start);
@@ -103,7 +123,13 @@ public class FinishActivity extends BaseSetupWizardActivity {
     private void finishSetup() {
         if (!mIsFinishing) {
             mIsFinishing = true;
-            setupRevealImage();
+            if( mSetupWizardApp.getSettingsBundle().containsKey(ENABLE_GMS) && mSetupWizardApp.getSettingsBundle().getBoolean(ENABLE_GMS) ) {
+                Log.e(TAG, "finishSetup - completeSetup");
+                completeSetup();
+            } else {
+                Log.e(TAG, "finishSetup - setupRevealImage");
+                setupRevealImage();
+            }
         }
     }
 
@@ -175,18 +201,75 @@ public class FinishActivity extends BaseSetupWizardActivity {
     }
 
     private void completeSetup() {
-        handleEnableMetrics(mSetupWizardApp);
-        handleNavKeys(mSetupWizardApp);
-        handleRecoveryUpdate(mSetupWizardApp);
-        handleNavigationOption(mSetupWizardApp);
-        final WallpaperManager wallpaperManager =
-                WallpaperManager.getInstance(mSetupWizardApp);
-        wallpaperManager.forgetLoadedWallpaper();
-        finishAllAppTasks();
-        SetupWizardUtils.enableStatusBar(this);
-        Intent intent = WizardManagerHelper.getNextIntent(getIntent(),
-                Activity.RESULT_OK);
-        startActivityForResult(intent, NEXT_REQUEST);
+        
+        if ( mSetupWizardApp.getSettingsBundle().containsKey(ENABLE_GMS) && mSetupWizardApp.getSettingsBundle().getBoolean(ENABLE_GMS) ) {
+            Log.e(TAG, "completeSetup - enableGmsAndWizard");
+
+            new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(R.string.gms_enable_confirmation).setMessage(R.string.gms_require_reboot)
+                .setPositiveButton(R.string.gms_enable_reboot, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.e(TAG, "SetupWizardUtils.enableGmsAndWizard");
+
+                        handleEnableMetrics(mSetupWizardApp);
+                        handleNavKeys(mSetupWizardApp);
+                        handleRecoveryUpdate(mSetupWizardApp);
+                        handleNavigationOption(mSetupWizardApp);
+                        final WallpaperManager wallpaperManager =
+                            WallpaperManager.getInstance(mSetupWizardApp);
+                        wallpaperManager.forgetLoadedWallpaper();
+                        
+                        finishAllAppTasks();
+                        SetupWizardUtils.enableGmsAndWizard(mSetupWizardApp, true);
+                        SetupWizardUtils.disableComponent(mSetupWizardApp, WizardManager.class);
+                        //SetupWizardUtils.finishSetupWizard(mContext);
+                        //SetupWizardUtils.disableHome(mContext);
+                        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+                        try {
+                            // no confirm, wait till device is rebooted
+                            pm.reboot(null);
+                        } catch (Exception e) {
+                            Log.e(TAG, "Failed to reboot (2).", e);
+                        }
+                    }
+                }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() { 
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.e(TAG, "cancel");
+
+                        handleEnableMetrics(mSetupWizardApp);
+                        handleNavKeys(mSetupWizardApp);
+                        handleRecoveryUpdate(mSetupWizardApp);
+                        handleNavigationOption(mSetupWizardApp);
+                        final WallpaperManager wallpaperManager =
+                            WallpaperManager.getInstance(mSetupWizardApp);
+                        wallpaperManager.forgetLoadedWallpaper();
+
+                        finishAllAppTasks();
+                        SetupWizardUtils.enableStatusBar(mSetupWizardApp);
+                        Intent intent = WizardManagerHelper.getNextIntent(getIntent(),
+                            Activity.RESULT_OK);
+                        startActivityForResult(intent, NEXT_REQUEST);
+                    }
+                }).show();                                               
+        } else {
+            Log.e(TAG, "completeSetup - not enableGmsAndWizard");
+
+            handleEnableMetrics(mSetupWizardApp);
+            handleNavKeys(mSetupWizardApp);
+            handleRecoveryUpdate(mSetupWizardApp);
+            handleNavigationOption(mSetupWizardApp);
+            final WallpaperManager wallpaperManager =
+                    WallpaperManager.getInstance(mSetupWizardApp);
+            wallpaperManager.forgetLoadedWallpaper();
+
+            finishAllAppTasks();
+            SetupWizardUtils.enableStatusBar(this);
+            Intent intent = WizardManagerHelper.getNextIntent(getIntent(),
+                    Activity.RESULT_OK);
+            startActivityForResult(intent, NEXT_REQUEST);
+        }
     }
 
     private static void handleEnableMetrics(SetupWizardApp setupWizardApp) {
@@ -226,6 +309,15 @@ public class FinishActivity extends BaseSetupWizardActivity {
             try {
                 overlayManager.setEnabledExclusiveInCategory(selectedNavMode, USER_CURRENT);
             } catch (Exception e) {}
+        }
+    }
+
+    private static void handleGmsEnable(SetupWizardApp setupWizardApp) {
+        if (setupWizardApp.getSettingsBundle().containsKey(ENABLE_GMS)) {
+            boolean update = setupWizardApp.getSettingsBundle()
+                    .getBoolean(ENABLE_GMS);
+
+            SetupWizardUtils.enableGmsAndWizard(setupWizardApp, update);
         }
     }
 

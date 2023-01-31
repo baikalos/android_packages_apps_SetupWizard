@@ -25,7 +25,7 @@
     <string name="loading">Секунду\u2026</string>
     <string name="setup_complete">Настройка завершена</string>
     <string name="setup_welcome">Добро пожаловать!</string>
-    <string name="setup_welcome_message">Добро пожаловать в <xliff:g id="name" example="BaikalOS">%1$s</xliff:g></string>
+    <string name="setup_welcome_message">Добро\nпожаловать в <xliff:g id="name" example="BaikalOS">%1$s</xliff:g></string>
     <string name="setup_locale">Язык</string>
     <string name="setup_wifi">Выбрать сеть Wi-Fi</string>
     <string name="setup_sim_missing">Нет SIM-карты</string>
@@ -89,4 +89,16 @@
     <string name="two_button_navigation">Навигация двумя кнопками</string>
     <string name="navbar_navigation">Навигация тремя кнопками</string>
     <string name="hide_gesture_hint">Скрыть подсказку навигации жестами</string>
+
+    <!-- Enable Google Services  -->
+    <string name="gms_enable_title">Сервисы Google</string>
+    <string name="gms_enable_description">Разрешить использование сервисов Google и Google Setup Wizard.</string>
+    <string name="gms_enable_warning">Сервисы Google могут быть включены в настройках устройства позднее.</string>
+    <string name="gms_enable_setting">Разрешить Сервисы Google</string>
+    <string name="gms_enable_full_description"><xliff:g id="gms_enable_description">%1$s</xliff:g>\n<xliff:g id="gms_enable_warning">%2$s</xliff:g></string>
+
+    <string name="gms_require_reboot">Чтобы разрешить использование Сервисов Google и работу Google Setup Wizrd устройство должно быть перезагружено</string>
+    <string name="gms_enable_confirmation">Разрешить Сервисы Google</string>
+    <string name="gms_enable_reboot">Перезагрузить</string>
+
 </resources>

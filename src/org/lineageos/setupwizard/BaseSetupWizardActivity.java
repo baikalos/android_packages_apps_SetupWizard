@@ -67,7 +67,7 @@ import java.util.List;
 
 public abstract class BaseSetupWizardActivity extends Activity implements NavigationBarListener {
 
-    public static final String TAG = BaseSetupWizardActivity.class.getSimpleName();
+    public static final String TAG = "BaikalSetupWizard:" + BaseSetupWizardActivity.class.getSimpleName();
 
     protected static final int TRANSITION_ID_NONE = -1;
     protected static final int TRANSITION_ID_DEFAULT = 1;
@@ -649,13 +649,13 @@ public abstract class BaseSetupWizardActivity extends Activity implements Naviga
         if (getTitleResId() != -1) {
             final CharSequence headerText = TextUtils.expandTemplate(getText(getTitleResId()));
             getGlifLayout().setHeaderText(headerText);
-        }
-        if (getIconResId() != -1) {
+        } 
+        /*if (getIconResId() != -1) {
             final GlifLayout layout = getGlifLayout();
             final Drawable icon = getDrawable(getIconResId()).mutate();
             icon.setTintList(Utils.getColorAccent(layout.getContext()));
             layout.setIcon(icon);
-        }
+        }*/
     }
 
     protected GlifLayout getGlifLayout() {

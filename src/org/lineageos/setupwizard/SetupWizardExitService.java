@@ -27,7 +27,7 @@ import org.lineageos.setupwizard.util.SetupWizardUtils;
 
 public class SetupWizardExitService extends IntentService {
 
-    private static final String TAG = "SUWExitService";
+    private static final String TAG = "BaikalSetupWizard:" + "SUWExitService";
 
     public SetupWizardExitService() {
         super(TAG);

@@ -46,7 +46,7 @@ import org.lineageos.setupwizard.util.SetupWizardUtils;
 
 public class NavigationSettingsActivity extends BaseSetupWizardActivity {
 
-    public static final String TAG = NavigationSettingsActivity.class.getSimpleName();
+    public static final String TAG = "BaikalSetupWizard:" + NavigationSettingsActivity.class.getSimpleName();
 
     private SetupWizardApp mSetupWizardApp;
 

@@ -34,7 +34,7 @@ import org.lineageos.setupwizard.util.SetupWizardUtils;
 import org.lineageos.setupwizard.wizardmanager.WizardManager;
 
 public class SetupWizardActivity extends BaseSetupWizardActivity {
-    private static final String TAG = SetupWizardActivity.class.getSimpleName();
+    private static final String TAG = "BaikalSetupWizard:" + SetupWizardActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,18 +43,23 @@ public class SetupWizardActivity extends BaseSetupWizardActivity {
             Log.v(TAG, "onCreate savedInstanceState=" + savedInstanceState);
         }
         if (SetupWizardUtils.hasGMS(this)) {
+            Log.v(TAG, "onCreate hasGMS, skip wizard");
             SetupWizardUtils.disableHome(this);
             finish();
         } else if (WizardManagerHelper.isUserSetupComplete(this)) {
+            Log.v(TAG, "onCreate user setup already complete");
             SetupWizardUtils.finishSetupWizard(this);
             finish();
         } else {
+            Log.v(TAG, "onCreate start wizard");
             onSetupStart();
             SetupWizardUtils.enableComponent(this, WizardManager.class);
             Intent intent = new Intent(ACTION_LOAD);
             if (isPrimaryUser()) {
+                Log.v(TAG, "onCreate primary");
                 intent.putExtra(EXTRA_SCRIPT_URI, getString(R.string.lineage_wizard_script_uri));
             } else {
+                Log.v(TAG, "onCreate secondary");
                 intent.putExtra(EXTRA_SCRIPT_URI,
                         getString(R.string.lineage_wizard_script_user_uri));
             }

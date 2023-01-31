@@ -25,8 +25,7 @@ import android.widget.CheckBox;
 
 public class LocationSettingsActivity extends BaseSetupWizardActivity {
 
-    public static final String TAG =
-            LocationSettingsActivity.class.getSimpleName().substring(0, 22);
+    public static final String TAG = "BaikalSetupWizard:" + LocationSettingsActivity.class.getSimpleName().substring(0, 22);
 
     private CheckBox mLocationAccess;
 
