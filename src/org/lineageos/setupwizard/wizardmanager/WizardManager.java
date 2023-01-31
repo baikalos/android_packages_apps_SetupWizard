@@ -42,7 +42,7 @@ import java.util.HashMap;
 
 public class WizardManager extends Activity {
 
-    private static final String TAG = WizardManager.class.getSimpleName();
+    private static final String TAG = "BaikalSetupWizard:" + WizardManager.class.getSimpleName();
 
     private static final HashMap<String, WizardScript> sWizardScripts = new HashMap();
 

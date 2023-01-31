@@ -28,7 +28,7 @@ import com.google.android.setupcompat.util.SystemBarHelper;
 
 public class WelcomeActivity extends BaseSetupWizardActivity {
 
-    public static final String TAG = WelcomeActivity.class.getSimpleName();
+    public static final String TAG = "BaikalSetupWizard:" + WelcomeActivity.class.getSimpleName();
 
     private View mRootView;
 

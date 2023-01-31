@@ -119,4 +119,16 @@
 
     <!-- Assisted GPS -->
     <string name="location_agps_access_summary">When location is on, <b>download satellite assistance data from the internet</b>, which can greatly improve the GPS startup performance.</string>
+
+    <!-- Enable Google Services  -->
+    <string name="gms_enable_title">Enable Google Services</string>
+    <string name="gms_enable_description">Enable Google Services and Google Setup Wizard.</string>
+    <string name="gms_enable_warning">Google Services can be enabled later in Settings.</string>
+    <string name="gms_enable_setting">Enable Google Services</string>
+    <string name="gms_enable_full_description"><xliff:g id="gms_enable_description">%1$s</xliff:g>\n<xliff:g id="gms_enable_warning">%2$s</xliff:g></string>
+
+    <string name="gms_require_reboot">To enable Google Services and continue with Google Setup wizard the device must be restarted</string>
+    <string name="gms_enable_confirmation">Enable Google Services</string>
+    <string name="gms_enable_reboot">Restart</string>
+
 </resources>

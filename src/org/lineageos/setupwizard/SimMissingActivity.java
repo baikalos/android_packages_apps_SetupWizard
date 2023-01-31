@@ -26,7 +26,7 @@ import org.lineageos.setupwizard.util.PhoneMonitor;
 
 public class SimMissingActivity extends BaseSetupWizardActivity {
 
-    public static final String TAG = SimMissingActivity.class.getSimpleName();
+    public static final String TAG = "BaikalSetupWizard:" + SimMissingActivity.class.getSimpleName();
 
     private PhoneMonitor mPhoneMonitor;
 
