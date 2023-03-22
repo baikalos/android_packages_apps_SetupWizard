@@ -60,11 +60,11 @@ public class GmsEnableActivity extends BaseSetupWizardActivity {
 
         if (!SetupWizardUtils.hasGMSInstalled(this) ) {
             Log.v(TAG, "No Google Services installed, skipping GmsEnableActivity");
-            /*
+            
             Intent intent = WizardManagerHelper.getNextIntent(getIntent(), Activity.RESULT_OK);
             nextAction(NEXT_REQUEST, intent);
             finish();
-            return;*/
+            return;
         }
 
         if (!SetupWizardUtils.hasGMSDisabled(this) ) {
