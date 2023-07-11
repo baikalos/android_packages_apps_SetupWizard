@@ -33,7 +33,7 @@ import org.lineageos.setupwizard.util.SetupWizardUtils;
 
 public class BiometricActivity extends SubBaseActivity {
 
-    public static final String TAG = BiometricActivity.class.getSimpleName();
+    public static final String TAG = "BaikalSetupWizard:" + BiometricActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

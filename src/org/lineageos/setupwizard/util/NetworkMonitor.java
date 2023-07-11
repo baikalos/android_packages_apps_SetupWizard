@@ -29,7 +29,7 @@ import android.util.Log;
 
 public class NetworkMonitor {
 
-    public static final String TAG = NetworkMonitor.class.getSimpleName();
+    public static final String TAG = "BaikalSetupWizard:" + NetworkMonitor.class.getSimpleName();
 
     private static NetworkMonitor sInstance;
 
