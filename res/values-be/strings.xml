@@ -54,4 +54,6 @@
     <string name="update_recovery_full_description"><xliff:g id="recovery_update_description">%1$s</xliff:g>\n<xliff:g id="recovery_update_warning">%2$s</xliff:g></string>
     <string name="setup_navigation">Навігацыя</string>
     <string name="gesture_navigation">Навігацыя жэстамі</string>
+    <string name="intro_restore_subtitle" product="tablet">Калі ў вас засталася рэзервовая копія з папярэдняга планшэта, які працаваў на <xliff:g id="name" example="BaikalOS">%s</xliff:g>, вы можаце аднавіць іх тут.</string>
+    <string name="intro_restore_subtitle" product="default">Калі ў вас засталася рэзервовая копія з папярэдняга тэлефона, які працаваў на <xliff:g id="name" example="BaikalOS">%s</xliff:g>, вы можаце аднавіць іх тут.</string>
 </resources>

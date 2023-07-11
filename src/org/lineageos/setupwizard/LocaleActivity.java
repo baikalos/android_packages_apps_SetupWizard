@@ -47,7 +47,7 @@ import java.util.Locale;
 
 public class LocaleActivity extends BaseSetupWizardActivity {
 
-    public static final String TAG = LocaleActivity.class.getSimpleName();
+    public static final String TAG = "BaikalSetupWizard:" + LocaleActivity.class.getSimpleName();
 
     private ArrayAdapter<com.android.internal.app.LocalePicker.LocaleInfo> mLocaleAdapter;
     private Locale mCurrentLocale;

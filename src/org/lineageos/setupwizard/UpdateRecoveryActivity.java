@@ -33,6 +33,8 @@ import org.lineageos.setupwizard.util.SetupWizardUtils;
 
 public class UpdateRecoveryActivity extends BaseSetupWizardActivity {
 
+    public static final String TAG = "BaikalSetupWizard:" + UpdateRecoveryActivity.class.getSimpleName();
+
     private CheckBox mRecoveryUpdateCheckbox;
     private SetupWizardApp mSetupWizardApp;
     private static boolean sFirstTime = true;
