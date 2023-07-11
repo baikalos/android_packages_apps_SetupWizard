@@ -36,7 +36,7 @@ import java.net.URISyntaxException;
 
 public class WizardAction implements Parcelable {
 
-    private static final String TAG = "WizardAction";
+    private static final String TAG = "BaikalSetupWizard:" + "WizardAction";
 
     private final String mId;
     private final String mUri;

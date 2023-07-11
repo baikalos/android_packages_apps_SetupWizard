@@ -33,7 +33,7 @@ import java.util.Random;
 
 public class CaptivePortalSetupActivity extends WrapperSubBaseActivity {
 
-    public static final String TAG = CaptivePortalSetupActivity.class.getSimpleName();
+    public static final String TAG = "BaikalSetupWizard:" + CaptivePortalSetupActivity.class.getSimpleName();
 
     private static final int CAPTIVE_PORTAL_SOCKET_TIMEOUT_MS = 10000;
 

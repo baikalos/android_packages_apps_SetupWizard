@@ -33,7 +33,7 @@ import org.lineageos.setupwizard.util.SetupWizardUtils;
 
 public class NetworkSetupActivity extends WrapperSubBaseActivity {
 
-    public static final String TAG = NetworkSetupActivity.class.getSimpleName();
+    public static final String TAG = "BaikalSetupWizard:" + NetworkSetupActivity.class.getSimpleName();
 
     @Override
     protected void onStartSubactivity() {
