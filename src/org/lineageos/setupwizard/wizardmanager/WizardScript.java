@@ -43,7 +43,7 @@ import java.util.Map;
 
 public class WizardScript implements Parcelable {
 
-    private static final String TAG = "WizardScript";
+    private static final String TAG = "BaikalSetupWizard:" + "WizardScript";
 
     static final String WIZARD_SCRIPT_NAMESPACE =
             "http://schemas.android.com/apk/res/com.google.android.setupwizard";

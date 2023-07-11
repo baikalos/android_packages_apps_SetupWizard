@@ -74,7 +74,7 @@ import java.util.List;
 
 public class PhoneMonitor {
 
-    public static final String TAG = PhoneMonitor.class.getSimpleName();
+    public static final String TAG = "BaikalSetupWizard:" + PhoneMonitor.class.getSimpleName();
 
     private static PhoneMonitor sInstance;
     private final Context mContext;

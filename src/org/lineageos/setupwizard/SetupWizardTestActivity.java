@@ -37,7 +37,7 @@ import java.util.List;
 
 public class SetupWizardTestActivity extends Activity {
 
-    private static final String TAG = SetupWizardTestActivity.class.getSimpleName();
+    private static final String TAG = "BaikalSetupWizard:" + SetupWizardTestActivity.class.getSimpleName();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

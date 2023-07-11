@@ -29,9 +29,9 @@ import org.lineageos.setupwizard.util.SetupWizardUtils;
 
 public class SetupWizardApp extends Application {
 
-    public static final String TAG = SetupWizardApp.class.getSimpleName();
+    public static final String TAG = "BaikalSetupWizard:" + SetupWizardApp.class.getSimpleName();
     // Verbose logging
-    public static final boolean LOGV = Log.isLoggable(TAG, Log.VERBOSE);
+    public static final boolean LOGV = true; //Log.isLoggable(TAG, Log.VERBOSE);
 
     public static final String ACTION_ACCESSIBILITY_SETTINGS =
             "android.settings.ACCESSIBILITY_SETTINGS_FOR_SUW";
@@ -64,6 +64,7 @@ public class SetupWizardApp extends Application {
     public static final String DISABLE_NAV_KEYS = "disable_nav_keys";
     public static final String ENABLE_RECOVERY_UPDATE = "enable_recovery_update";
     public static final String UPDATE_RECOVERY_PROP = "persist.vendor.recovery_update";
+    public static final String ENABLE_GMS = "enable_gms";
 
     public static final String NAVIGATION_OPTION_KEY = "navigation_option";
 
