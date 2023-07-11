@@ -16,9 +16,9 @@
      limitations under the License.
 -->
 <resources>
-    <dimen name="logo_header_height">244dp</dimen>
-    <dimen name="header_height">244dp</dimen>
-    <dimen name="header_condensed_height">88dp</dimen>
+    <dimen name="logo_header_height">214dp</dimen>
+    <dimen name="header_height">214dp</dimen>
+    <dimen name="header_condensed_height">64dp</dimen>
     <dimen name="page_title_height">64dp</dimen>
     <dimen name="header_title_margin_left">26dp</dimen>
     <dimen name="header_logo_margin_left">25dp</dimen>
@@ -42,9 +42,9 @@
     <dimen name="welcome_content_container_padding_bottom">30dp</dimen>
     <dimen name="welcome_content_container_padding_end">24dp</dimen>
     <dimen name="welcome_content_container_padding_start">40dp</dimen>
-    <dimen name="welcome_title_text_size">56sp</dimen>
-    <dimen name="welcome_title_padding_bottom">16dp</dimen>
-    <dimen name="welcome_title_line_height">64dp</dimen>
-    <dimen name="welcome_accessibility_text_size">20sp</dimen>
+    <dimen name="welcome_title_text_size">30sp</dimen>
+    <dimen name="welcome_title_padding_bottom">4dp</dimen>
+    <dimen name="welcome_title_line_height">48dp</dimen>
+    <dimen name="welcome_accessibility_text_size">16sp</dimen>
 
 </resources>

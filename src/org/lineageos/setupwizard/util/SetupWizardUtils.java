@@ -67,7 +67,7 @@ import java.util.List;
 
 public class SetupWizardUtils {
 
-    private static final String TAG = SetupWizardUtils.class.getSimpleName();
+    private static final String TAG = "BaikalSetupWizard:" + SetupWizardUtils.class.getSimpleName();
 
     private static final String GMS_PACKAGE = "com.google.android.gms";
     private static final String GMS_SUW_PACKAGE = "com.google.android.setupwizard";
@@ -190,8 +190,10 @@ public class SetupWizardUtils {
     public static boolean hasGMS(Context context) {
         String gmsSuwPackage = hasLeanback(context) ? GMS_TV_SUW_PACKAGE : GMS_SUW_PACKAGE;
 
-        if (PackageManagerUtils.isAppInstalled(context, GMS_PACKAGE) &&
-                PackageManagerUtils.isAppInstalled(context, gmsSuwPackage)) {
+        if (!isGmsEnabled(context) ) return false;
+
+        if (PackageManagerUtils.isAppInstalled(context, GMS_PACKAGE, PackageManager.MATCH_DISABLED_COMPONENTS | PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS) 
+                && PackageManagerUtils.isAppInstalled(context, gmsSuwPackage)) {
             PackageManager packageManager = context.getPackageManager();
             if (LOGV) {
                 Log.v(TAG, GMS_SUW_PACKAGE + " state = " +
@@ -201,6 +203,44 @@ public class SetupWizardUtils {
                     COMPONENT_ENABLED_STATE_DISABLED;
         }
         return false;
+    }
+
+    public static boolean hasGMSDisabled(Context context) {
+
+        if (PackageManagerUtils.isAppInstalled(context, GMS_PACKAGE,PackageManager.MATCH_DISABLED_COMPONENTS | PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS)) {
+            PackageManager packageManager = context.getPackageManager();
+            if (LOGV) {
+                Log.v(TAG, GMS_PACKAGE + " state = " +
+                        packageManager.getApplicationEnabledSetting(GMS_PACKAGE));
+            }
+            return packageManager.getApplicationEnabledSetting(GMS_PACKAGE) ==
+                    COMPONENT_ENABLED_STATE_DISABLED;
+        }
+        return false;
+    }
+
+    public static boolean hasGMSInstalled(Context context) {
+
+        if (PackageManagerUtils.isAppInstalled(context, GMS_PACKAGE,PackageManager.MATCH_DISABLED_COMPONENTS | 
+                                PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS)) {
+            PackageManager packageManager = context.getPackageManager();
+            if (LOGV) {
+                Log.v(TAG, GMS_PACKAGE + " state = " +
+                        packageManager.getApplicationEnabledSetting(GMS_PACKAGE));
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public static void enableGmsAndWizard(Context context, boolean enabled) {
+        android.provider.Settings.Secure.putInt(context.getContentResolver(),   
+            android.provider.Settings.Secure.GMS_ENABLED, enabled ? 1 : 0);
+    }
+
+    public static boolean isGmsEnabled(Context context) {
+        return android.provider.Settings.Secure.getInt(context.getContentResolver(),
+            android.provider.Settings.Secure.GMS_ENABLED, 0) == 1;
     }
 
     public static boolean isPackageInstalled(Context context, String packageName) {
@@ -305,7 +345,11 @@ public class SetupWizardUtils {
     public static void disableHome(Context context) {
         ComponentName homeComponent = getHomeComponent(context);
         if (homeComponent != null) {
-            setComponentEnabledState(context, homeComponent, COMPONENT_ENABLED_STATE_DISABLED);
+            /*if( !homeComponent.getPackageName().contains("lineageos.setupwizard") ) {
+                Log.w(TAG, "Home component is not lineageos.setupwizard. Skipping. (" + homeComponent.getPackageName() + ")");
+            } else {*/
+                setComponentEnabledState(context, homeComponent, COMPONENT_ENABLED_STATE_DISABLED);
+            /*}*/
         } else {
             Log.w(TAG, "Home component not found. Skipping.");
         }
