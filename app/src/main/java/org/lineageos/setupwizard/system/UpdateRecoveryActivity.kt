@@ -42,7 +42,7 @@ class UpdateRecoveryActivity : BaseSetupWizardActivity() {
         if (firstTime) {
             SetupWizardApp.settingsBundle.putBoolean(
                 ENABLE_RECOVERY_UPDATE,
-                SystemProperties.getBoolean(UPDATE_RECOVERY_PROP, true),
+                SystemProperties.getBoolean(UPDATE_RECOVERY_PROP, false),
             )
         }
 
@@ -52,7 +52,7 @@ class UpdateRecoveryActivity : BaseSetupWizardActivity() {
     override fun onResume() {
         super.onResume()
         updateRecoveryItem.isChecked =
-            SetupWizardApp.settingsBundle.getBoolean(ENABLE_RECOVERY_UPDATE, true)
+            SetupWizardApp.settingsBundle.getBoolean(ENABLE_RECOVERY_UPDATE, false)
     }
 
     override fun onNextPressed() {
